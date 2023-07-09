@@ -58,7 +58,7 @@ public class GiveCommand extends AbstractCommand {
                     if (reciever != null) {
                         Common.getInstance().getServerCaller().getPlayerCaller().sendMessage(reciever.getUuid(), Common
                                 .getInstance().getLanguageManager().parse("money_give_received", Common.getInstance().format
-                                        (worldName, currency, amount), sender.getName()), this.getName());
+                                        (worldName, currency, amount), sender.getName()));
                     }
                 }
             } else {
