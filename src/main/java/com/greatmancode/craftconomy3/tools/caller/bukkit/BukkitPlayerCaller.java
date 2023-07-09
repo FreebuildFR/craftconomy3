@@ -40,6 +40,8 @@ public class BukkitPlayerCaller extends PlayerCaller {
 
 
     private Player getBukkitPlayer(UUID uuid) {
+        if (uuid == null)
+            return null;
         return ((BukkitLoader) getCaller().getLoader()).getServer().getPlayer(uuid);
 
     }
@@ -139,7 +141,7 @@ public class BukkitPlayerCaller extends PlayerCaller {
 
     @Override
     public String getPlayerWorld(UUID uuid) {
-        Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayer(uuid);
+        Player p = getBukkitPlayer(uuid);
         return (p != null) ? p.getWorld().getName() : "";
     }
 
@@ -151,7 +153,7 @@ public class BukkitPlayerCaller extends PlayerCaller {
 
     @Override
     public boolean isOnline(UUID uuid) {
-        return ((BukkitLoader) getCaller().getLoader()).getServer().getPlayer(uuid) != null;
+        return getBukkitPlayer(uuid) != null;
     }
 
     @Override
@@ -209,7 +211,7 @@ public class BukkitPlayerCaller extends PlayerCaller {
 
     @Override
     public com.greatmancode.craftconomy3.tools.entities.Player getPlayer(UUID uuid) {
-        Player player = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayer(uuid);
+        Player player = getBukkitPlayer(uuid);
         if (player == null) return null;
         CommandSender sender = new PlayerCommandSender<>(player.getDisplayName(), player.getUniqueId(), player);
         return new com.greatmancode.craftconomy3.tools.entities.Player(player.getName(),
@@ -231,7 +233,7 @@ public class BukkitPlayerCaller extends PlayerCaller {
 
     @Override
     public com.greatmancode.craftconomy3.tools.entities.Player getOnlinePlayer(UUID uuid) {
-        Player player = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayer(uuid);
+        Player player = getBukkitPlayer(uuid);
         if (player == null) return null;
         if (player.isOnline()) {
             CommandSender sender = new PlayerCommandSender<>(player.getDisplayName(), player.getUniqueId(), player);
